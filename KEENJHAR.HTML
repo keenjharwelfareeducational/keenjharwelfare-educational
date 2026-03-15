@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Keenjhar Welfare · Final</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:#0a0520; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:8px; }
+        .card { max-width:400px; width:100%; background:#0c0822; border:3px solid #d4a742; border-radius:50px; padding:22px 18px; }
+        .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; }
+        .admin-icon { background:#1e1937; border:2px solid #d4a742; color:#e5b73b; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+        .logo-area { text-align:center; margin-bottom:12px; }
+        .ampersand { font-size:3.2rem; font-weight:900; background:linear-gradient(135deg,#f5d654,#caa126); -webkit-background-clip:text; color:transparent; }
+        .spread-text { font-size:1.2rem; font-weight:800; color:#e5b73b; letter-spacing:5px; margin-top:-6px; }
+        .org-name { font-size:1.8rem; font-weight:900; background:linear-gradient(180deg,#fbdd8c,#caa126); -webkit-background-clip:text; color:transparent; }
+        .services-line { color:#e5b73b; font-size:0.8rem; border-bottom:2px solid #b69033; padding-bottom:10px; margin-bottom:15px; text-align:center; }
+        .section-head { color:#e5b73b; font-size:1.3rem; font-weight:700; margin:12px 0 8px; }
+        .admin-panel { background:#120e29; border-radius:35px; padding:18px; border:3px solid #e5b73b; margin:15px 0; }
+        .admin-header { display:flex; align-items:center; border-bottom:2px solid #c9a23b; padding-bottom:8px; margin-bottom:12px; }
+        .admin-login-box { background:#1e1937; border-radius:30px; padding:15px; }
+        .input-group { margin-bottom:12px; }
+        .input-group label { color:#e5b73b; display:block; margin-bottom:4px; }
+        .input-group input, .input-group textarea { width:100%; background:#251f40; border:2px solid #b38f33; border-radius:30px; padding:10px; color:white; }
+        .btn { background:#dbaa30; border:none; color:black; font-weight:900; padding:12px; width:100%; border-radius:50px; cursor:pointer; margin-top:5px; }
+        .btn-small { background:#dbaa30; border:none; padding:8px 16px; border-radius:30px; cursor:pointer; }
+        .media-options { display:flex; gap:10px; margin:10px 0; }
+        .media-btn { flex:1; background:#1e1937; border:2px solid #b38f33; border-radius:40px; padding:10px; text-align:center; color:#ffd77b; cursor:pointer; }
+        .mobile-box { background:#120e29; border-radius:35px; padding:18px; border:2px solid #b28f3b; margin-bottom:15px; }
+        .posts-section { background:#120e29; border-radius:35px; padding:15px; border:2px solid #b28f3b; margin:15px 0; }
+        .post-card { background:#1e1937; border-radius:25px; padding:12px; margin-bottom:12px; border-left:4px solid #e5b73b; }
+        .post-title { color:#fbdeaa; font-weight:700; }
+        .post-desc { color:#ecd99b; font-size:0.9rem; margin:5px 0; }
+        .post-meta { display:flex; justify-content:space-between; color:#b69f5a; }
+        .share-btn { background:transparent; border:1px solid #e5b73b; color:#e5b73b; padding:4px 10px; border-radius:20px; cursor:pointer; }
+        .user-panel { background:#120e29; border-radius:35px; padding:18px; border:3px solid #4285F4; margin:15px 0; }
+        .user-header { color:#fbdeaa; border-bottom:2px solid #4285F4; padding-bottom:8px; margin-bottom:12px; }
+        .comment-section { background:#0b0821; border-radius:30px; padding:12px; }
+        .comment-list { background:#030117; border-radius:20px; padding:8px; max-height:100px; overflow-y:auto; color:#ecd99b; margin-bottom:8px; }
+        .comment-input { display:flex; gap:5px; }
+        .comment-input input { flex:1; background:#1f1a38; border:2px solid #c49f37; border-radius:40px; padding:8px; color:white; }
+        .comment-input button { background:#c49f37; border:none; border-radius:40px; padding:0 15px; cursor:pointer; }
+        .logout-btn { background:transparent; border:1px solid #b69033; color:#e5b73b; padding:8px; width:100%; border-radius:50px; margin-top:10px; cursor:pointer; }
+        .footer { text-align:center; color:#f3c550; border-top:2px solid #c6a03a; padding-top:12px; margin-top:12px; }
+        .hidden { display:none; }
+        .message { color:#ffdb8e; text-align:center; margin-top:8px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="header">
+        <div></div>
+        <div class="admin-icon" id="adminIcon"><i class="fas fa-user-shield"></i></div>
+    </div>
+    <div class="logo-area">
+        <div class="ampersand">&</div>
+        <div class="spread-text">SPREAD</div>
+        <div class="org-name">KEENJHAR WELFARE & EDUCATIONAL</div>
+        <div class="services-line">plastic · pulteen · tents</div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel hidden">
+        <div class="admin-header">
+            <i class="fas fa-crown"></i> <h2>ADMIN PANEL</h2>
+            <button class="btn-small" id="closeAdminBtn">✕</button>
+        </div>
+        <div id="adminLoginForm" class="admin-login-box">
+            <div class="input-group"><label>Username</label><input type="text" id="adminUser" placeholder="irfanali14"></div>
+            <div class="input-group"><label>Password</label><input type="password" id="adminPass" placeholder="••••••••"></div>
+            <button class="btn" id="adminLoginBtn">LOGIN</button>
+            <div id="adminError" class="message" style="color:#ff6b6b;"></div>
+        </div>
+        <div id="adminDashboard" class="hidden">
+            <div class="input-group"><label>Post Title</label><input type="text" id="postTitle" placeholder="Enter title"></div>
+            <div class="input-group"><label>Description</label><textarea id="postDesc" rows="2"></textarea></div>
+            <div class="media-options">
+                <div class="media-btn" id="cameraBtn"><i class="fas fa-camera"></i> Camera</div>
+                <div class="media-btn" id="galleryBtn"><i class="fas fa-images"></i> Gallery</div>
+            </div>
+            <input type="file" id="imageInput" accept="image/*" capture="environment" style="display:none;">
+            <div id="imagePreview"></div>
+            <button class="btn" id="publishPostBtn">PUBLISH POST</button>
+            <div id="postStatus" class="message"></div>
+            <button class="btn-small" id="adminLogoutBtn" style="width:100%; margin-top:10px;">Logout</button>
+        </div>
+    </div>
+
+    <!-- Mobile Login -->
+    <div class="section-head">📱 MOBILE LOGIN</div>
+    <div class="mobile-box" id="mobileLoginSection">
+        <div class="input-group"><label>Mobile Number</label><input type="tel" id="mobileNumber" placeholder="03xxxxxxxxx" maxlength="11"><small>11 digits with 03</small></div>
+        <button class="btn" id="sendOtpBtn">SEND OTP</button>
+        <div id="otpSection" class="hidden" style="margin-top:15px;">
+            <div class="input-group"><label>Enter OTP</label><input type="text" id="otpInput" placeholder="6-digit OTP" maxlength="6"></div>
+            <button class="btn" id="verifyOtpBtn">VERIFY & LOGIN</button>
+        </div>
+        <div id="loginMessage" class="message"></div>
+    </div>
+
+    <!-- Posts -->
+    <div class="section-head">📢 LATEST POSTS</div>
+    <div class="posts-section" id="postsSection"></div>
+
+    <!-- User Panel -->
+    <div id="userPanel" class="user-panel hidden">
+        <div class="user-header"><i class="fas fa-user"></i> USER PANEL <span style="float:right;" id="loggedInMobile"></span></div>
+        <div class="comment-section">
+            <div class="comment-list" id="commentList"></div>
+            <div class="comment-input"><input type="text" id="commentInput" placeholder="Write comment..."><button id="postCommentBtn"><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+        <button class="logout-btn" id="logoutBtn">LOGOUT</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">WEBSITE DEVELOPMENT HASNAIN ALI JAGIRANI</div>
+</div>
+
+<script>
+    let posts = JSON.parse(localStorage.getItem('posts')) || [
+        {id:1, title:"Plastic Sheets", desc:"500 plastic sheets distributed", date:"2024-03-15", shares:12, image:null},
+        {id:2, title:"Tents", desc:"200 tents for flood victims", date:"2024-03-14", shares:8, image:null},
+        {id:3, title:"Polythene Bags", desc:"1000 free bags given", date:"2024-03-13", shares:5, image:null}
+    ];
+    let comments = JSON.parse(localStorage.getItem('comments')) || [{user:"03123456789", text:"Great work!", time:"2 hours ago"}];
+    let pendingOtps = {}, loggedInUser = null, isAdmin = false, selectedImage = null;
+
+    const postsSection = document.getElementById('postsSection');
+    const mobileLoginSection = document.getElementById('mobileLoginSection');
+    const userPanel = document.getElementById('userPanel');
+    const loggedInMobile = document.getElementById('loggedInMobile');
+    const commentList = document.getElementById('commentList');
+    const commentInput = document.getElementById('commentInput');
+    const postCommentBtn = document.getElementById('postCommentBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+    const mobileNumber = document.getElementById('mobileNumber');
+    const otpInput = document.getElementById('otpInput');
+    const otpSection = document.getElementById('otpSection');
+    const loginMessage = document.getElementById('loginMessage');
+    const adminIcon = document.getElementById('adminIcon');
+    const adminPanel = document.getElementById('adminPanel');
+    const closeAdminBtn = document.getElementById('closeAdminBtn');
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const adminDashboard = document.getElementById('adminDashboard');
+    const adminUser = document.getElementById('adminUser');
+    const adminPass = document.getElementById('adminPass');
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminError = document.getElementById('adminError');
+    const publishPostBtn = document.getElementById('publishPostBtn');
+    const postTitle = document.getElementById('postTitle');
+    const postDesc = document.getElementById('postDesc');
+    const postStatus = document.getElementById('postStatus');
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+    const cameraBtn = document.getElementById('cameraBtn');
+    const galleryBtn = document.getElementById('galleryBtn');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    function displayPosts() {
+        let html = '';
+        posts.slice().reverse().forEach(p => {
+            html += `<div class="post-card"><div class="post-title">📌 ${p.title}</div>${p.image ? `<img src="${p.image}" style="width:100%; max-height:150px; border-radius:15px; margin:8px 0;">` : ''}<div class="post-desc">${p.desc}</div><div class="post-meta"><span>📅 ${p.date}</span><span><button class="share-btn" onclick="sharePost(${p.id})"><i class="fas fa-share"></i> Share (${p.shares||0})</button></span></div></div>`;
+        });
+        postsSection.innerHTML = html;
+    }
+    window.sharePost = (id) => { let p = posts.find(x=>x.id==id), e = prompt("Email:"); if(e&&e.includes('@')){ p.shares++; localStorage.setItem('posts',JSON.stringify(posts)); alert(`✅ Shared to ${e}`); displayPosts(); } };
+    function loadComments() {
+        let html = '';
+        comments.slice(-5).reverse().forEach(c => html += `<div style="padding:4px; border-bottom:1px solid #4f3f1f;">👤 ${c.user}: ${c.text} <span style="color:#b69f5a;">${c.time}</span></div>`);
+        commentList.innerHTML = html || '<div>No comments</div>';
+    }
+
+    adminIcon.onclick = () => adminPanel.classList.toggle('hidden');
+    closeAdminBtn.onclick = () => adminPanel.classList.add('hidden');
+    adminLoginBtn.onclick = () => {
+        if(adminUser.value.trim()==='irfanali14' && adminPass.value.trim()==='irfanali67') {
+            isAdmin=true; adminLoginForm.classList.add('hidden'); adminDashboard.classList.remove('hidden'); adminError.innerText='';
+        } else adminError.innerText='❌ Wrong credentials';
+    };
+    cameraBtn.onclick = () => { imageInput.setAttribute('capture','environment'); imageInput.click(); };
+    galleryBtn.onclick = () => { imageInput.removeAttribute('capture'); imageInput.click(); };
+    imageInput.onchange = (e) => { let f=e.target.files[0]; if(f){ let r=new FileReader(); r.onload=(e)=>{ selectedImage=e.target.result; imagePreview.innerHTML=`<img src="${selectedImage}" style="max-width:100%; max-height:150px; border-radius:15px;">`; }; r.readAsDataURL(f); } };
+    publishPostBtn.onclick = () => {
+        let t=postTitle.value.trim(), d=postDesc.value.trim();
+        if(!t||!d) { postStatus.innerText='Enter title and description'; return; }
+        posts.push({id:Date.now(), title:t, desc:d, date:new Date().toISOString().split('T')[0], shares:0, image:selectedImage});
+        localStorage.setItem('posts',JSON.stringify(posts));
+        postStatus.innerText='✅ Published!'; postTitle.value=''; postDesc.value=''; imagePreview.innerHTML=''; selectedImage=null; imageInput.value=''; displayPosts();
+    };
+    adminLogoutBtn.onclick = () => { isAdmin=false; adminLoginForm.classList.remove('hidden'); adminDashboard.classList.add('hidden'); adminPanel.classList.add('hidden'); adminUser.value=''; adminPass.value=''; };
+
+    sendOtpBtn.onclick = () => {
+        let m=mobileNumber.value.trim();
+        if(!/^03[0-9]{9}$/.test(m)) { loginMessage.innerText='❌ 11 digits starting with 03'; return; }
+        let otp=Math.floor(100000+Math.random()*900000).toString();
+        pendingOtps[m]=otp; otpSection.classList.remove('hidden'); loginMessage.innerText=`✅ OTP sent (Demo: ${otp})`; otpInput.value=otp;
+    };
+    verifyOtpBtn.onclick = () => {
+        let m=mobileNumber.value.trim(), o=otpInput.value.trim();
+        if(pendingOtps[m]===o) {
+            loggedInUser=m; delete pendingOtps[m];
+            mobileLoginSection.classList.add('hidden'); userPanel.classList.remove('hidden'); loggedInMobile.innerText=m;
+            loginMessage.innerText=''; otpSection.classList.add('hidden'); mobileNumber.value=''; otpInput.value=''; loadComments();
+        } else alert('❌ Invalid OTP');
+    };
+    logoutBtn.onclick = () => { loggedInUser=null; mobileLoginSection.classList.remove('hidden'); userPanel.classList.add('hidden'); };
+    postCommentBtn.onclick = () => {
+        if(!loggedInUser) { alert('Login first'); return; }
+        let t=commentInput.value.trim(); if(!t) return;
+        comments.push({user:loggedInUser, text:t, time:'just now'});
+        localStorage.setItem('comments',JSON.stringify(comments)); loadComments(); commentInput.value='';
+    };
+
+    displayPosts(); loadComments();
+</script>
+</body>
+</html>
